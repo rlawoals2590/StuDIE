@@ -11,7 +11,8 @@ class Model:
         self.school = kwargs['school']
         self.local = kwargs['local']
         self.join_date = datetime.now()
-        self.rival = kwargs['rival']
+        # self.rival = kwargs['rival']
+        # self.rival_school = kwargs['rival_school']
         self.token = None
 
         self.user_info = []
@@ -32,7 +33,6 @@ class Model:
             'school': self.school,
             'local': self.local,
             'join_date': self.join_date,
-            'rival': self.rival,
             'token': self.token
         }
 

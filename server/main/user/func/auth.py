@@ -1,11 +1,22 @@
 from main.models import Student
 from main import db
 
+import bcrypt
+
 
 def get_users(stid):
     student = Student.query.filter_by(stid=stid).all()
     if len(student) == 0:
         return True
+
+
+def get_pw(stid, name, school):
+    student = Student.query.filter_by(stid=stid, name=name, school=school).first()
+    return student.passwd
+
+
+def pw_check(get_passwd, save_passwd):
+    return bcrypt.checkpw(get_passwd.encode('utf-8'), save_passwd.encode('utf-8'))
 
 
 def sign_up(user_info):
@@ -16,8 +27,20 @@ def sign_up(user_info):
                        school=user_info['school'],
                        local=user_info['local'],
                        join_date=user_info['join_date'],
-                       rival=user_info['rival'],
                        login_token=user_info['token'])
     db.session.add(sign_std)
     db.session.commit()
-    return True
+    return 'Success'
+
+
+def insert_token(stid, school, token):
+    student_to_update = Student.query.filter_by(stid=stid, school=school).first()
+
+    if student_to_update:
+        student_to_update.login_token = token
+
+        db.session.commit()
+
+        return 'Succes'
+    else:
+        return 'Fail'
