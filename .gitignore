@@ -131,3 +131,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+.idea
+server/StuDIE.db
+*.pyc
+server/__pycache__
+server/main/__pycache__
+server/main/user/__pycache__
+server/config.py
