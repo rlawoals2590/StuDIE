@@ -4,6 +4,19 @@
 ```
 pip install -r requirements.txt
 ```
+### Flask Run (Windows) 
+```
+set FLASK_APP=main
+
+set FLASK_DEBUG=true
+```
+### Flask Run (MacOS)
+```
+export FLASK_APP=main
+
+export FLASK_DEBUG=true
+```
+
 ### Database init
 ```
 flask db init
@@ -23,3 +36,5 @@ flask db upgrade
 ```
 flask run 
 ```
+
+
