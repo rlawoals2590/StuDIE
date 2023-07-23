@@ -18,19 +18,6 @@ class Student(db.Model):                                    # 학생 테이블
     )
 
 
-# class Point(db.Model):                                                              # 포인트 테이블
-#         stid = db.Column(db.Integer, primary_key=True)                                  # 학번 (학생 테이블의 학번 참조)
-#     db.ForeignKeyConstraint(['stid'], ['Student.stid'], name='fk_stid')
-#     name = db.Column(db.Integer, nullable=False)                                    # 이름
-#     school = db.Column(db.Text(), primary_key=True)                                 # 학교 이름
-#     db.ForeignKeyConstraint(['school'], ['Student.school'], name='fk_school')
-#     local = db.Column(db.Text(), nullable=False)                                    # 지역 이름
-#     point = db.Column(db.Integer, nullable=False)                                   # 포인트
-#
-#     __table_args__ = (
-#         db.PrimaryKeyConstraint('stid', 'school', name='pk_stid_school_point2'),
-#     )
-
 class Point(db.Model):
     stid = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Integer, nullable=False)
