@@ -28,5 +28,6 @@ class ChatNamepsace(Namespace):
 
     def on_send_remote_video(self, data):
         room = session.get('room')
+        print('test')
         emit('receive_remote_video', data['stream'], room=room, include_self=False)
 

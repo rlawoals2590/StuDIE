@@ -1,10 +1,11 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template
-from markupsafe import escape
+from ..user.func.auth import user_validation
 
 room_route = Blueprint("room_route", __name__, url_prefix='/room')
 
 
 @room_route.route('/', methods=['GET','POST'])
+@user_validation()
 def index():
     if request.method == 'POST':
         session['name'] = request.form['name']
@@ -13,16 +14,7 @@ def index():
     return render_template('index.html')
 
 
-@room_route.route('/chat/')
-def chat():
-    name = escape(session['name'])
-    room = escape(session['room'])
-    # if name == '' or room == '':
-    #     return redirect(url_for('room_route.index'))
-    return render_template('chat.html', name=name, room=room)
-
-
 @room_route.route('/stream/')
+@user_validation()
 def stream():
     return render_template('cam.html')
-

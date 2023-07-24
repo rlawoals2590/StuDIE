@@ -1,19 +1,19 @@
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from functools import wraps
-from main.models import Student
+from main.models import User
 from main import db
 
 import bcrypt
 
 
 def get_users(stid):
-    student = Student.query.filter_by(stid=stid).all()
+    student = User.query.filter_by(stid=stid).all()
     if len(student) == 0:
         return True
 
 
-def get_pw(stid, name, school):
-    student = Student.query.filter_by(stid=stid, name=name, school=school).first()
+def get_pw(stid, name, belong):
+    student = User.query.filter_by(stid=stid, name=name, belong=belong).first()
     return student.passwd
 
 
@@ -22,12 +22,14 @@ def pw_check(get_passwd, save_passwd):
 
 
 def sign_up(user_info):
-    sign_std = Student(stid=user_info['stid'],
-                       passwd=user_info['passwd'],
+    sign_std = User(id=user_info['id'],
+                       stid=user_info['stid'],
                        name=user_info['name'],
+                       belong=user_info['belong'],
                        gender=user_info['gender'],
-                       school=user_info['school'],
                        local=user_info['local'],
+                       rival_id=user_info['rival_id'],
+                       passwd=user_info['passwd'],
                        join_date=user_info['join_date'],
                        login_token=user_info['token'])
     db.session.add(sign_std)
@@ -35,8 +37,8 @@ def sign_up(user_info):
     return 'Success'
 
 
-def insert_token(stid, school, token):
-    student_to_update = Student.query.filter_by(stid=stid, school=school).first()
+def insert_token(stid, belong, token):
+    student_to_update = User.query.filter_by(stid=stid, belong=belong).first()
 
     if student_to_update:
         student_to_update.login_token = token
@@ -48,8 +50,8 @@ def insert_token(stid, school, token):
         return 'Fail'
 
 
-def delete_token(stid, school):
-    student_to_update = Student.query.filter_by(stid=stid, school=school).first()
+def delete_token(stid, belong):
+    student_to_update = User.query.filter_by(stid=stid, belong=belong).first()
 
     if student_to_update:
         student_to_update.login_token = None
@@ -61,8 +63,8 @@ def delete_token(stid, school):
         return 'Fail'
 
 
-def resign_user(stid, school):
-    student_to_resign = Student.query.filter_by(stid=stid, school=school).first()
+def resign_user(stid, belong):
+    student_to_resign = User.query.filter_by(stid=stid, belong=belong).first()
 
     if student_to_resign:
         db.session().delete(student_to_resign)
