@@ -1,6 +1,11 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import Home from '@/components/HomePage.vue';
-import PRoom from '@/components/PRoom.vue';
+import StudyRoom from '@/components/StudyRoom.vue';
+import StudyTimer from '@/components/StudyTimer.vue';
+import profilePage from '@/components/ProfilePage.vue';
+import RankingBoard from '@/components/RankingBoard.vue';
+
+
 
 const routes = [
   {
@@ -9,10 +14,26 @@ const routes = [
     component: Home
   },
   {
-    path: '/PRoom',
-    name: 'PRoom',
-    component: PRoom
-  }
+    path: '/StudyRoom',
+    name: 'StudyRoom',
+    component: StudyRoom
+  },
+  {
+    path: '/StudyTimer',
+    name: 'StudyTimer',
+    component: StudyTimer
+  },
+  {
+    path: '/profilePage',
+    name: 'profilePage',
+    component: profilePage
+  },
+  {
+    path: '/RankingBoard',
+    name: 'RankingBoard',
+    component: RankingBoard
+  } 
+
 ];
 
 const router = createRouter({
