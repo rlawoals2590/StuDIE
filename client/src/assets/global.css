@@ -1,0 +1,107 @@
+.display-box {
+    background-color: #111111;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #111111;
+    margin: 20px;
+    min-width: 800px;
+  }
+
+  .neon-sign-pink {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    color: #F20C8B;
+    text-shadow: 0 0 10px #F20C8B;
+    animation: neon-glow-pink 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon-glow-pink {
+    0% {
+      text-shadow: 0 0 10px #F20C8B;
+    }
+    100% {
+      text-shadow: 0 0 20px #F20C8B, 0 0 30px #F20C8B, 0 0 40px #F20C8B, 0 0 50px #F20C8B;
+    }
+  }
+
+
+  .neon-sign-purple {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    color: #6626A6;
+    text-shadow: 0 0 10px #6626A6;
+    animation: neon-glow-purple 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon-glow-purple {
+    0% {
+      text-shadow: 0 0 10px #6626A6;
+    }
+    100% {
+      text-shadow: 0 0 20px #6626A6, 0 0 30px #6626A6, 0 0 40px #6626A6, 0 0 50px #6626A6;
+    }
+  }
+
+
+  .neon-sign-sky {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    color: #1DF2DD;
+    text-shadow: 0 0 10px #1DF2DD;
+    animation: neon-glow-sky 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon-glow-sky {
+    0% {
+      text-shadow: 0 0 10px #1DF2DD;
+    }
+    100% {
+      text-shadow: 0 0 0px #1DF2DD, 0 0 0px #1DF2DD, 0 0 0px #1DF2DD, 0 0 0px #1DF2DD;
+    }
+  }
+
+  .content {
+    
+    
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #000000;
+    color: #eeeeee;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  .title{
+    font-weight: bold;
+    font-size: 30px;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #000000;
+  }
+    
+  footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(238, 238, 238, 0.5);
+    background-color: #000000;
+    padding-bottom: 0px;
+  }
+
+  
+  a{
+    text-decoration: none;
+  }
+  ul{
+    list-style-type: none;
+    padding: 0;
+  }
+
