@@ -3,10 +3,9 @@ from flask_jwt_extended import create_access_token, get_jwt
 from flask import Blueprint, request, make_response, redirect, session
 from markupsafe import escape
 
-from main.models import Student
-
 from .func.user_model import Model
-from .func.auth import get_users, get_pw, sign_up, pw_check, insert_token, user_validation, delete_token
+from .func.auth import get_users, get_pw, sign_up, pw_check, insert_token, \
+    user_validation, delete_token, resign_user
 
 user_route = Blueprint("user_route", __name__, url_prefix='/user')
 jwt_blocklist = set()
@@ -16,13 +15,6 @@ jwt_blocklist = set()
 @user_validation()
 def index():
     return 'test'
-
-
-@user_route.route('/detail/<int:stid>/')
-def detail(stid):
-    student = Student.query.get_or_404(stid)
-    print(student)
-    return student.name
 
 
 @user_route.route('/register/', methods=['POST'])
@@ -81,8 +73,29 @@ def logout():
     jwt_blocklist.add(jti)
 
     resp = make_response('''
-                        로그아웃을 성공하였습니다! <a href='/user/'>홈으로</a>이동하세요!
+                        로그아웃을 성공하였습니다!
                     ''')
     resp.set_cookie('user_access_token', '', expires=0)  # 쿠키 만료 시간을 0으로 설정하여 삭제
 
     return resp
+
+
+@user_route.route('/resign/')
+@user_validation()
+def resign():
+    resign_user(escape(session['stid']), escape(session['school']))
+    session.pop('stid', None)
+    session.pop('school', None)
+
+    token = get_jwt()
+    jti = token['jti']
+    jwt_blocklist.add(jti)
+
+    resp = make_response('''
+                        회원 탈퇴가 성공하였습니다!
+                    ''')
+    resp.set_cookie('user_access_token', '', expires=0)  # 쿠키 만료 시간을 0으로 설정하여 삭제
+
+    return resp
+
+

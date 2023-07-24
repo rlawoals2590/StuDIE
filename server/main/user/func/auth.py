@@ -61,6 +61,18 @@ def delete_token(stid, school):
         return 'Fail'
 
 
+def resign_user(stid, school):
+    student_to_resign = Student.query.filter_by(stid=stid, school=school).first()
+
+    if student_to_resign:
+        db.session().delete(student_to_resign)
+        db.session().commit()
+
+        return 'Succes'
+    else:
+        return 'Fail'
+
+
 def user_validation():
     def user_auth_decorator(f):
         @wraps(f)
