@@ -37,6 +37,9 @@ def create_app():
     from .room import room_route
     app.register_blueprint(room_route.room_route)
 
+    from .rank import rank_route
+    app.register_blueprint(rank_route.rank_route)
+
     from .room.events import ChatNamepsace
     socketio.on_namespace(ChatNamepsace('/room/chat/'))
 

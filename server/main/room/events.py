@@ -16,18 +16,17 @@ class ChatNamepsace(Namespace):
         join_room(room)
         emit('status', {'msg': session.get('name') + '님이 입장하셨습니다'}, room=room)
 
-    def on_text(self, data):
-        room = session.get('room')
-        print(data)
-        emit('message', {'msg': session.get('name') + ':' + data['msg']}, room=room)
+    # def on_text(self, data):
+    #     room = session.get('room')
+    #     print(data)
+    #     emit('message', {'msg': session.get('name') + ':' + data['msg']}, room=room)
 
     def on_left(self, data):
         room = session.get('room')
         leave_room(room)
         emit('status', {'msg': session.get('name') + '님이 퇴장하셨습니다'}, room=room)
 
-    def on_send_remote_video(self, data):
-        room = session.get('room')
-        print('test')
-        emit('receive_remote_video', data['stream'], room=room, include_self=False)
+    def on_receiveVideo(self, data):
+        print(data)
+        emit('receiveVideo', data['stream'], include_self=False)
 
