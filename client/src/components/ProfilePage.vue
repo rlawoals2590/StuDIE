@@ -2,7 +2,7 @@
   <div class="main-container">
     <!-- NAV 시작 (header 역할을 겸함) -->
     <nav class="display-box">
-      <a href="/"> <h1 class="neon-sign-pink title">STUDIE - My profile </h1> </a>
+      <router-link to="/"> <h1 class="neon-sign-pink title">STUDIE - My profile </h1> </router-link>
     </nav>
     <!-- NAV 끝 -->
 
