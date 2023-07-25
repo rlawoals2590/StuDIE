@@ -23,15 +23,15 @@ def pw_check(get_passwd, save_passwd):
 
 def sign_up(user_info):
     sign_std = User(id=user_info['id'],
-                       stid=user_info['stid'],
-                       name=user_info['name'],
-                       belong=user_info['belong'],
-                       gender=user_info['gender'],
-                       local=user_info['local'],
-                       rival_id=user_info['rival_id'],
-                       passwd=user_info['passwd'],
-                       join_date=user_info['join_date'],
-                       login_token=user_info['token'])
+                    stid=user_info['stid'],
+                    name=user_info['name'],
+                    belong=user_info['belong'],
+                    gender=user_info['gender'],
+                    local=user_info['local'],
+                    rival_id=user_info['rival_id'],
+                    passwd=user_info['passwd'],
+                    join_date=user_info['join_date'],
+                    login_token=user_info['token'])
     db.session.add(sign_std)
     db.session.commit()
     return 'Success'
