@@ -1,18 +1,19 @@
 from datetime import datetime
+import secrets
 import bcrypt
 
 
 class Model:
     def __init__(self, **kwargs):
+        self.id = secrets.token_hex(8)
         self.stid = kwargs['stid']
-        self.passwd = kwargs['passwd']
         self.name = kwargs['name']
+        self.belong = kwargs['belong']
         self.gender = kwargs['gender']
-        self.school = kwargs['school']
         self.local = kwargs['local']
+        self.rival_id = None
+        self.passwd = kwargs['passwd']
         self.join_date = datetime.now()
-        # self.rival = kwargs['rival']
-        # self.rival_school = kwargs['rival_school']
         self.token = None
 
         self.user_info = []
@@ -26,12 +27,14 @@ class Model:
     def user_model(self):
         passwd = self.pw_encryption()
         self.user_info = {
+            'id': self.id,
             'stid': self.stid,
-            'passwd': passwd,
             'name': self.name,
+            'belong': self.belong,
             'gender': self.gender,
-            'school': self.school,
             'local': self.local,
+            'rival_id': self.rival_id,
+            'passwd': passwd,
             'join_date': self.join_date,
             'token': self.token
         }
