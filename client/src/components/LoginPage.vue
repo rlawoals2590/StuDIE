@@ -9,10 +9,9 @@
 
       <div class="display-box login">
           <h2>로그인</h2>
-          <input class="apple-like-input" v-model="stid"  placeholder="학번" type="number"  style="color: white;">
+          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="number"  style="color: white;">
           <input class="apple-like-input" v-model="password"  type="password" placeholder="비밀번호">
-          <input class="apple-like-input" v-model="name" placeholder="이름">
-          <input class="apple-like-input" v-model="belong" placeholder="소속">
+
           
           <button class="apple-like-button" @click="login">로그인</button>
 
@@ -31,46 +30,40 @@
 <script>
 import axios from 'axios';
 
-  export default {
-    data() {
-      return {
-        stid: '',
-        password: '',
-        name: '',
-        belong: ''
-      }
-    },
-    methods: {
-      async login() {
-        const FormData = require('form-data');
-        let data = new FormData();
-        data.append('stid', this.stid);
-        data.append('passwd', this.password);
-        data.append('name', this.name);
-        data.append('belong', this.belong);
+export default {
+  data() {
+    return {
+      id: '',
+      password: '',
+    }
+  },
+  methods: {
+    async login() {
+      // We're sending JSON data, so we use a JavaScript object
+      let data = {
+        id: this.id,
+        passwd: this.password
+      };
 
-        let config = {
-          method: 'post',
-          maxBodyLength: Infinity,
-          url: '/user/login/',
-          headers: { 
-            'Content-Type' :  'multipart/form-data'
-          },
-          data : data
-        };
+      let config = {
+        method: 'post',
+        url: '/user/login/',
+        headers: { 
+          'Content-Type' :  'application/json' // The content type should be application/json for JSON data
+        },
+        data: data
+      };
 
-        axios.request(config)
-        .then((response) => {
-          location.href = 'http://localhost:8081/'
-          
-          
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
+      axios.request(config)
+      .then((response) => {
+        location.href = 'http://localhost:8081/'
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
   }
+}
 </script>
 
 <style scoped>

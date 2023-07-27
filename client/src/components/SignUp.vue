@@ -9,9 +9,10 @@
 
       <div class="display-box sign-up">
           <h2>회원 가입</h2>
-          <input class="apple-like-input" v-model="stid"  placeholder="학번" type="number"  style="color: white;">
+          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="number"  style="color: white;">
           <input class="apple-like-input" v-model="passwd"  type="password" placeholder="비밀번호">
           <input class="apple-like-input" v-model="name" placeholder="이름">
+          <input class="apple-like-input" v-model="birth" placeholder="생일">
           <input class="apple-like-input" v-model="gender" placeholder="성별" type="number">
           <input class="apple-like-input" v-model="belong" placeholder="소속">
           <input class="apple-like-input" v-model="local" placeholder="지역">
@@ -34,9 +35,10 @@ import axios from 'axios';
   export default {
     data() {
       return {
-        stid: '',
+        id: '',
         passwd: '',
         name: '',
+        birth : '',
         gender: '',
         belong: '',
         local: '',
@@ -46,9 +48,10 @@ import axios from 'axios';
       async signUp() {
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('stid', this.stid);
+        data.append('id', this.id);
         data.append('passwd',this.passwd);
         data.append('name', this.name);
+        data.append('birth', this.birth);
         data.append('gender', this.gender);
         data.append('belong',this.belong);
         data.append('local', this.local);
