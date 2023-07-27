@@ -2,8 +2,9 @@
   <div class="main-container">
     <!-- NAV 시작 (header 역할을 겸함) -->
     <nav class="display-box">
-      <h1 class="neon-sign-pink title">STUDIE </h1>
+      <h1 class="neon-sign-pink title">STUDIE</h1>
       <h1 class="neon-sign-purple title">STUDY 📖 OR DIE 💀</h1>
+
     </nav>
     <!-- NAV 끝 -->
 
@@ -66,11 +67,12 @@
 <script>
 export default {
 
-};
+}
 </script>
 
 <style scoped>
 @import url('../assets/global.css');
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -79,7 +81,7 @@ export default {
   color: #eeeeee;
 }
 
-main {
+.main {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -92,43 +94,40 @@ main {
   background-color: #000000;
 }
 
-.logo-container {
-  position: relative;
-  animation: floatingLogo 3s infinite ease-in-out;
-}
 
-@keyframes floatingLogo {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.logo {
-  width: 200px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-input {
-  width: 200px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #4e4feb;
-  border: none;
-  color: #eeeeee;
+.profile-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
+
+.profile-img:hover {
+  transform: scale(1.1);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #111111;
+  color: #eeeeee;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+  transition: 0.3s ease-in-out;
+  min-width: 200px;
+  display: none;
+}
+
+.profile-container:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-dropdown h2 {
+  margin: 5px 0;
+}
+
+/* other styles */
 </style>

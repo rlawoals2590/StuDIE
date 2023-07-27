@@ -60,9 +60,9 @@
     }
   }
 
-  .content {
-    
-    
+  router-link{
+    text-decoration: none;
+
   }
 
   .main-container {
