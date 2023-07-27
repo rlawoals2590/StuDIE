@@ -6,14 +6,14 @@ from main import db
 import bcrypt
 
 
-def get_users(stid):
-    student = User.query.filter_by(stid=stid).all()
+def get_users(id):
+    student = User.query.filter_by(id=id).all()
     if len(student) == 0:
         return True
 
 
-def get_pw(stid, name, belong):
-    student = User.query.filter_by(stid=stid, name=name, belong=belong).first()
+def get_pw(id):
+    student = User.query.filter_by(id=id).first()
     return student.passwd
 
 
@@ -23,8 +23,8 @@ def pw_check(get_passwd, save_passwd):
 
 def sign_up(user_info):
     sign_std = User(id=user_info['id'],
-                    stid=user_info['stid'],
                     name=user_info['name'],
+                    birth=user_info['birth'],
                     belong=user_info['belong'],
                     gender=user_info['gender'],
                     local=user_info['local'],
@@ -37,8 +37,8 @@ def sign_up(user_info):
     return 'Success'
 
 
-def insert_token(stid, belong, token):
-    student_to_update = User.query.filter_by(stid=stid, belong=belong).first()
+def insert_token(id, token):
+    student_to_update = User.query.filter_by(id=id).first()
 
     if student_to_update:
         student_to_update.login_token = token
@@ -50,8 +50,8 @@ def insert_token(stid, belong, token):
         return 'Fail'
 
 
-def delete_token(stid, belong):
-    student_to_update = User.query.filter_by(stid=stid, belong=belong).first()
+def delete_token(id):
+    student_to_update = User.query.filter_by(id=id).first()
 
     if student_to_update:
         student_to_update.login_token = None
@@ -63,8 +63,8 @@ def delete_token(stid, belong):
         return 'Fail'
 
 
-def resign_user(stid, belong):
-    student_to_resign = User.query.filter_by(stid=stid, belong=belong).first()
+def resign_user(id):
+    student_to_resign = User.query.filter_by(id=id).first()
 
     if student_to_resign:
         db.session().delete(student_to_resign)
@@ -82,10 +82,7 @@ def user_validation():
         def _user_auth_decorator(*args, **kwargs):
             current_user_id = get_jwt_identity()
             if not current_user_id:
-                result = '''
-                        잘못된 접근입니다.
-                    '''
-                return result
+                return {'status': 'Authentication failed'}
             return f(*args, **kwargs)
 
         return _user_auth_decorator

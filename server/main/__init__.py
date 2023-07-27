@@ -2,6 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from flask_restx import Api
 
 from config import Config
 import config
@@ -12,6 +13,8 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+    api = Api(app)
+
     app.config.from_object(config)
     app.config['JWT_SECRET_KEY'] = Config.JWT_SECRET_KEY
     app.secret_key = Config.SESSION_SECRET_KEY
@@ -31,17 +34,17 @@ def create_app():
 
     socketio.init_app(app)
 
-    from .user import user_route
-    app.register_blueprint(user_route.user_route)
+    from .user.user_route import user_api
+    api.add_namespace(user_api, '/user')
 
-    from .room import room_route
-    app.register_blueprint(room_route.room_route)
+    # from .room import room_route
+    # app.register_blueprint(room_route.room_route)
 
-    from .rank import rank_route
-    app.register_blueprint(rank_route.rank_route)
+    from .rank.rank_route import rank_api
+    api.add_namespace(rank_api, '/rank')
 
-    from .visitor import visitor_route
-    app.register_blueprint(visitor_route.visitor_route)
+    from .visitor.visitor_route import visitor_api
+    api.add_namespace(visitor_api, '/visitor')
 
     from .room.events import ChatNamepsace
     socketio.on_namespace(ChatNamepsace('/room/chat/'))

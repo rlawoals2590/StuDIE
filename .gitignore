@@ -134,6 +134,7 @@ dist
 
 
 .idea
+server/migrations
 server/StuDIE.db
 *.pyc
 server/__pycache__
