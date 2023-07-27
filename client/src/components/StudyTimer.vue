@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <nav class="display-box">
-            <a href="/"> <h1 class="neon-sign-pink title">스터다이 타임 타이머 ⏰</h1> </a>
+            <router-link to="/"> <h1 class="neon-sign-pink title">STUDIE 타임 타이머 ⏰</h1> </router-link>
         </nav>
 
         <main>
@@ -197,9 +197,6 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
-}
 
 button {
     -webkit-appearance: none;

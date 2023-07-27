@@ -2,7 +2,7 @@
   <div class="main-container">
     <!-- NAV 시작 (header 역할을 겸함) -->
     <nav class="display-box">
-      <a href="/"> <h1 class="neon-sign-pink title">STUDIE - My profile </h1> </a>
+      <router-link to="/"> <h1 class="neon-sign-pink title">STUDIE - My profile </h1> </router-link>
     </nav>
     <!-- NAV 끝 -->
 
@@ -22,6 +22,8 @@
 
             <li> 남성 </li>
           </ul>
+
+          <button @click="logout">Logout</button>
         </div>
         <!-- 간략 프로필 끝 -->
 
@@ -77,10 +79,25 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-
-};
-
+  methods: {
+    logout() {
+      axios.get('/user/logout')
+        .then(() => {
+          // 로그아웃이 성공하면, 쿠키에서 토큰을 제거합니다.
+          this.$cookies.remove('user_access_token');
+          // 그리고 로그인 페이지로 리다이렉트합니다.
+          this.$router.push('/LoginPage');
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Logout failed');
+        });
+    }
+  }
+}
 </script>
 
 <style scoped>
