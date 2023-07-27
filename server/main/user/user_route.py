@@ -1,6 +1,6 @@
 from flask_jwt_extended import create_access_token, get_jwt
 
-from flask import request, make_response, redirect, session
+from flask import request, make_response, session
 from markupsafe import escape
 from flask_restx import Resource, Namespace, fields
 
@@ -38,13 +38,21 @@ class Register(Resource):
             'local': fields.String(title='지역', default='서울', required=True),
     }))
     def post(self):
-        id = request.form['id']
-        passwd = request.form['passwd']
-        name = request.form['name']
-        birth = request.form['birth']
-        gender = request.form['gender']
-        belong = request.form['belong']
-        local = request.form['local']
+        # id = request.form['id']
+        # passwd = request.form['passwd']
+        # name = request.form['name']
+        # birth = request.form['birth']
+        # gender = request.form['gender']
+        # belong = request.form['belong']
+        # local = request.form['local']
+
+        id = request.json.get('id')
+        passwd = request.json.get('passwd')
+        name = request.json.get('name')
+        birth = request.json.get('birth')
+        gender = request.json.get('gender')
+        belong = request.json.get('belong')
+        local = request.json.get('local')
 
         if get_users(id):
             student_info = Model(id=id, name=name, birth=birth, belong=belong, gender=gender, local=local, passwd=passwd)
