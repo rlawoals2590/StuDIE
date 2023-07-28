@@ -5,6 +5,8 @@ import StudyTimer from '@/components/StudyTimer.vue';
 import profilePage from '@/components/ProfilePage.vue';
 import RankingBoard from '@/components/RankingBoard.vue';
 
+import test from '@/components/test.vue';
+
 
 
 const routes = [
@@ -32,6 +34,11 @@ const routes = [
     path: '/RankingBoard',
     name: 'RankingBoard',
     component: RankingBoard
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   } 
 
 ];
