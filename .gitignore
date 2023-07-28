@@ -140,4 +140,3 @@ server/StuDIE.db
 server/__pycache__
 server/main/__pycache__
 server/main/user/__pycache__
-server/config.py
