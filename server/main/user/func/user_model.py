@@ -5,9 +5,9 @@ import bcrypt
 
 class Model:
     def __init__(self, **kwargs):
-        self.id = secrets.token_hex(8)
-        self.stid = kwargs['stid']
+        self.id = kwargs['id']
         self.name = kwargs['name']
+        self.birth = datetime.strptime(kwargs['birth'], "%Y-%m-%d")
         self.belong = kwargs['belong']
         self.gender = kwargs['gender']
         self.local = kwargs['local']
@@ -28,8 +28,8 @@ class Model:
         passwd = self.pw_encryption()
         self.user_info = {
             'id': self.id,
-            'stid': self.stid,
             'name': self.name,
+            'birth': self.birth,
             'belong': self.belong,
             'gender': self.gender,
             'local': self.local,
