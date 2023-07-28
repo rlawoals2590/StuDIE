@@ -9,6 +9,8 @@ import SignUp from '@/components/SignUp.vue';
 import Cookies from 'js-cookie';
 
 
+import test from '@/components/test.vue';
+
 
 
 const routes = [

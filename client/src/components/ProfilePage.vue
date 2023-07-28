@@ -35,7 +35,7 @@
         </div>
         
         </div>
-
+        
         <!-- 지역 시작 -->
         <div class="display-box">
           <h2> 지역 </h2>
