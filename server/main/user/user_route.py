@@ -26,15 +26,21 @@ class Index(Resource):
         return {'status': 'user'}
 
 
+@user_api.route('/get_users/<string:id>/')
+class OtherUsers(Resource):
+    # @user_validation()
+    def get(self, id=None):
+        if id is None:
+            print('test')
+            return 'test'
+        return jsonify(get_users(id))
+
+
 @user_api.route('/get_users/')
 class Users(Resource):
-    @user_api.expect(user_api.model('get user', {
-        'id': fields.String(title='아이디', default='abcde1234', required=True),
-    }))
     # @user_validation()
-    def post(self):
-        id = request.json.get('id')
-
+    def get(self):
+        id = escape(session['id'])
         return jsonify(get_users(id))
 
 

@@ -7,6 +7,7 @@ from flask_restx import Resource, Namespace, fields
 import base64
 
 room_api = Namespace('room_api')
+detection = CHECKOUT_STUDYING(5)
 
 
 @room_api.route('/upload')
@@ -22,11 +23,14 @@ class UploadImage(Resource):
         with open('main/ai_models/image/image.jpg', 'wb') as image_file:
             image_file.write(base64.b64decode(image_data))
 
-        detection = CHECKOUT_STUDYING()
-        score = detection.start_detection("main/ai_models/image/image.jpg")
-        print(score)
-
         return {'message': "Image uploaded successfully"}, 200
 
+
+@room_api.route('/score/')
+class Score(Resource):
+
+    def get(self):
+        score = detection.start_detection("main/ai_models/image/image.jpg")
+        return {'score': score}
 
 
