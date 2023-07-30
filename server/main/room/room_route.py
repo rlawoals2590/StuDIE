@@ -33,13 +33,8 @@ class Score(Resource):
 
     def get(self):
         id = escape(session['id'])
-        score = detection.start_detection("main/ai_models/image/image.jpg")
-
-        user_score = {
-            id: score
-        }
-
-        print(user_score)
-        return {'score': user_score}, 200
+        score = detection.start_detection("main/ai_models/image/image.jpg", id)
+        print(score)
+        return {'score': score}, 200
 
 
