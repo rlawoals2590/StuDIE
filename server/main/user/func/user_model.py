@@ -7,7 +7,7 @@ class Model:
     def __init__(self, **kwargs):
         self.id = kwargs['id']
         self.name = kwargs['name']
-        self.birth = datetime.strptime(kwargs['birth'], "%Y-%m-%d")
+        self.birth = kwargs['birth']
         self.belong = kwargs['belong']
         self.gender = kwargs['gender']
         self.local = kwargs['local']

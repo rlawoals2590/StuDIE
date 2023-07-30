@@ -6,10 +6,24 @@ from main import db
 import bcrypt
 
 
-def get_users(id):
+def check_user(id):
     student = User.query.filter_by(id=id).all()
     if len(student) == 0:
         return True
+
+
+def get_users(id):
+    user = User.query.filter_by(id=id).first()
+    user_info = {
+        'name': user.name,
+        'gender': user.gender,
+        'age': user.birth,
+        'belong': user.belong,
+        'local': user.local,
+        'point': user.point,
+        'rival_id': user.rival_id
+    }
+    return user_info
 
 
 def get_pw(id):

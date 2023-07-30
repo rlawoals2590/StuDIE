@@ -17,3 +17,4 @@ def index():
 @room_route.route('/upload/', methods=['POST'])
 def upload():
     f = request.files['']
+

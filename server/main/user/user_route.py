@@ -1,12 +1,12 @@
 from flask_jwt_extended import create_access_token, get_jwt
 
-from flask import request, make_response, session
+from flask import request, make_response, session, jsonify
 from markupsafe import escape
 from flask_restx import Resource, Namespace, fields
 
 from .func.user_model import Model
 from .func.auth import get_users, get_pw, sign_up, pw_check, insert_token, \
-    user_validation, delete_token, resign_user
+    user_validation, delete_token, resign_user, check_user
 
 
 user_api = Namespace('user_api')
@@ -26,26 +26,30 @@ class Index(Resource):
         return {'status': 'user'}
 
 
+@user_api.route('/get_users/')
+class Users(Resource):
+    @user_api.expect(user_api.model('get user', {
+        'id': fields.String(title='아이디', default='abcde1234', required=True),
+    }))
+    # @user_validation()
+    def post(self):
+        id = request.json.get('id')
+
+        return jsonify(get_users(id))
+
+
 @user_api.route('/register/')
 class Register(Resource):
     @user_api.expect(user_api.model('user register', {
             'id': fields.String(title='아이디', default='abcde1234', required=True),
             'passwd': fields.String(title='비밀번호', default='Abcd@1234', required=True),
             'name': fields.String(title='이름', default='홍길동', required=True),
-            'birth': fields.Date(title='생년월일', default='2005-08-20', required=True),
+            'birth': fields.Date(title='생년', default='2005', required=True),
             'gender': fields.Integer(title='성별', default=0, required=True),
             'belong': fields.String(title='소속', default='세명컴퓨터고등학교', required=True),
             'local': fields.String(title='지역', default='서울', required=True),
     }))
     def post(self):
-        # id = request.form['id']
-        # passwd = request.form['passwd']
-        # name = request.form['name']
-        # birth = request.form['birth']
-        # gender = request.form['gender']
-        # belong = request.form['belong']
-        # local = request.form['local']
-
         id = request.json.get('id')
         passwd = request.json.get('passwd')
         name = request.json.get('name')
@@ -54,7 +58,7 @@ class Register(Resource):
         belong = request.json.get('belong')
         local = request.json.get('local')
 
-        if get_users(id):
+        if check_user(id):
             student_info = Model(id=id, name=name, birth=birth, belong=belong, gender=gender, local=local, passwd=passwd)
             return sign_up(student_info.user_model())
         else:
@@ -74,7 +78,7 @@ class Login(Resource):
         id = request.json.get('id')
         get_passwd = request.json.get('passwd')
 
-        if not get_users(id):
+        if not check_user(id):
             save_passwd = get_pw(id)
             if pw_check(get_passwd, save_passwd):
                 access_token = create_access_token(identity=id)
@@ -121,5 +125,20 @@ class Resign(Resource):
         resp.set_cookie('user_access_token', '', expires=0)  # 쿠키 만료 시간을 0으로 설정하여 삭제
 
         return resp
+
+
+@user_api.route('/upload', methods=['POST'])
+class UploadImage(Resource):
+    @user_api.expect(user_api.model('image upload', {
+        'image': fields.String(required=True, description='Base64 encoded image data'),
+    }))
+    def post(self):
+        image_data = request.json['image']
+        image_data = image_data.split(',')[1]
+        print(image_data[:100])
+
+        with open('image.jpg', 'wb') as image_file:
+            image_file.write(base64.b64decode(image_data))
+        return {'message': "Image uploaded successfully"}, 200
 
 

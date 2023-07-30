@@ -1,6 +1,6 @@
 from flask import jsonify
 from main import db
-from main.models import User, Point
+from main.models import User
 from sqlalchemy import func
 from flask_restx import Resource, Namespace
 
