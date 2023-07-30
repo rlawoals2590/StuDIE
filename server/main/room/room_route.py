@@ -1,5 +1,6 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template
 from ..user.func.auth import user_validation
+from markupsafe import escape
 
 from main.ai_models.checkout_studying import CHECKOUT_STUDYING
 
@@ -7,6 +8,7 @@ from flask_restx import Resource, Namespace, fields
 import base64
 
 room_api = Namespace('room_api')
+
 detection = CHECKOUT_STUDYING(5)
 
 
@@ -30,7 +32,14 @@ class UploadImage(Resource):
 class Score(Resource):
 
     def get(self):
+        id = escape(session['id'])
         score = detection.start_detection("main/ai_models/image/image.jpg")
-        return {'score': score}
+
+        user_score = {
+            id: score
+        }
+
+        print(user_score)
+        return {'score': user_score}, 200
 
 
