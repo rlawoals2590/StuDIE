@@ -9,7 +9,7 @@
 
       <div class="display-box login">
           <h2>로그인</h2>
-          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="number"  style="color: white;">
+          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="text"  style="color: white;">
           <input class="apple-like-input" v-model="password"  type="password" placeholder="비밀번호">
 
           
