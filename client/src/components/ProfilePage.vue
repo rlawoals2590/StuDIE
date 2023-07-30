@@ -15,12 +15,12 @@
           <div class="profile-picture">
             <img src="../assets/logo-non-text.png" alt="Profile Picture">
           </div>
-          <h2> 윤현우 </h2>
+          <h2> {{ profile.name }} </h2>
           <ul>
-            <li> 라이벌 : 홍박사 </li>
-            <li> 포인트 : 196000 </li>
+            <li> 라이벌 : {{ profile.rival_id }} </li>
+            <li> 포인트 : {{ profile.point }} </li>
 
-            <li> 남성 </li>
+            <li> {{ profile.gender }} </li>
           </ul>
 
           <button @click="logout">Logout</button>
@@ -39,30 +39,23 @@
         <!-- 지역 시작 -->
         <div class="display-box">
           <h2> 지역 </h2>
-          <p> 경기도</p>
+          <p> {{ profile.local }}</p>
         </div>
         <!-- 지역 끝 -->
 
           <!-- 소속 시작 -->
           <div class="display-box">
             <h2> 소속 학교 </h2>
-            <p> 세명컴퓨터고등학교</p>
+            <p> {{ profile.belong }}</p>
           </div>
           <!-- 소속 끝 -->
         
-        <!-- 직업 시작 -->
-        <div class="display-box">
-          <h2> 직업 </h2>
-          <p> 고등학생 3학년</p>
-        </div>
-        <!-- 직업 끝 -->
 
         <!-- 목표 시작 -->
         <div class="display-box">
           <h2> 목표 </h2>
           <ul>
-            <li> 정보처리산업기사 </li>
-            <li> 수능 </li>
+            <li> {{ profile.goal }} </li>
           </ul>
         </div>
         <!-- 목표 끝 -->
@@ -79,25 +72,39 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
+
 
 export default {
   methods: {
     logout() {
-      axios.get('/user/logout')
-        .then(() => {
-          // 로그아웃이 성공하면, 쿠키에서 토큰을 제거합니다.
-          this.$cookies.remove('user_access_token');
-          // 그리고 로그인 페이지로 리다이렉트합니다.
-          this.$router.push('/LoginPage');
-        })
-        .catch(err => {
-          console.error(err);
-          alert('Logout failed');
-        });
+      
+        axios.get('/user/logout/');
+        this.$cookies.remove('user_access_token')
+        this.$cookies.remove('session')
+        this.$router.push('/')
+
+        
+        
+    },
+
+  
+      
+    },
+  mounted() {
+
+    axios.get('/user/get_users/').then((response) => {
+      this.profile = response.data
+    })
+
+  },
+  data(){
+    return{
+    profile : {}
     }
   }
-}
+  }
+
 </script>
 
 <style scoped>

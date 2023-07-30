@@ -9,13 +9,22 @@
 
       <div class="display-box sign-up">
           <h2>회원 가입</h2>
-          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="number"  style="color: white;">
+          <input class="apple-like-input" v-model="id"  placeholder="아이디" type="text"  style="color: white;" required>
+
           <input class="apple-like-input" v-model="passwd"  type="password" placeholder="비밀번호">
           <input class="apple-like-input" v-model="name" placeholder="이름">
           <input class="apple-like-input" v-model="birth" placeholder="생일">
-          <input class="apple-like-input" v-model="gender" placeholder="성별" type="number">
+          <select v-model="gender " class="apple-like-input" placeholder="태어난 해" >
+            <option value="" disabled selected>성별</option>
+            <option value="0"> 남성 </option>            
+            <option value="1"> 여성 </option>
+          </select>
+          
+          
           <input class="apple-like-input" v-model="belong" placeholder="소속">
           <input class="apple-like-input" v-model="local" placeholder="지역">
+          <input class="apple-like-input" v-model="vision" placeholder="목표">
+
           
           <button class="apple-like-button" @click="signUp">가입하기</button>
           <router-link to="/loginpage" > 로그인 </router-link>
@@ -42,11 +51,15 @@ import axios from 'axios';
         gender: '',
         belong: '',
         local: '',
+        vision : ''
       }
     },
     methods: {
       async signUp() {
-
+      if (!this.id || !this.passwd || !this.name || !this.birth || !this.gender || !this.vision) {
+        alert('모든 필드를 채워주세요!')
+        return;
+      }
         let data = {
           id: this.id,
         passwd:this.passwd,
@@ -55,6 +68,7 @@ import axios from 'axios';
         gender: this.gender,
         belong:this.belong,
         local: this.local,
+        vision : this.vision
       };
         let config = {
           method: 'post',
@@ -67,7 +81,7 @@ import axios from 'axios';
 
         axios.request(config)
         .then((response) => {
-          location.href = 'http://localhost:8081/'
+          location.href = '/'
           
         })
         .catch((error) => {
@@ -82,6 +96,8 @@ import axios from 'axios';
   <style scoped>
   @import url('../assets/global.css');
 
+
+  
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1; /* Firefox */
@@ -93,7 +109,7 @@ import axios from 'axios';
     
   }
 
-  .sign-up input, .sign-up button{
+  .sign-up input, .sign-up button, .sign-up select{
     padding: 10px;
     margin: 10px;
     border-radius: 10px;

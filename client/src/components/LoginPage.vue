@@ -56,7 +56,7 @@ export default {
 
       axios.request(config)
       .then((response) => {
-        location.href = 'http://localhost:8081/'
+        location.href = '/'
       })
       .catch((error) => {
         console.log(error);
