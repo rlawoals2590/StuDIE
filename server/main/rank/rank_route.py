@@ -14,19 +14,19 @@ class Index(Resource):
     def get(self):
         return {'status': 'rank'}
 
-#
-# @rank_api.route('/local/')
-# class Local(Resource):
-#     @user_validation()
-#     def get(self):
-#         return jsonify(local_ranking(User.local, User.point, User.id))
-#
-#
-# @rank_api.route('/belong/')
-# class Belong(Resource):
-#     @user_validation()
-#     def get(self):
-#         return jsonify(belong_ranking(User.belong, User.point, User.id))
+
+@rank_api.route('/local/')
+class Local(Resource):
+    @user_validation()
+    def get(self):
+        return jsonify(local_ranking(User.local, User.point, User.id))
+
+
+@rank_api.route('/belong/')
+class Belong(Resource):
+    @user_validation()
+    def get(self):
+        return jsonify(belong_ranking(User.belong, User.point, User.id))
 
 
 @rank_api.route('/personal/')

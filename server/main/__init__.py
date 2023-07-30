@@ -40,8 +40,8 @@ def create_app():
     from .room.room_route import room_api
     api.add_namespace(room_api, '/room')
 
-    # from .rank.rank_route import rank_api
-    # api.add_namespace(rank_api, '/rank')
+    from .rank.rank_route import rank_api
+    api.add_namespace(rank_api, '/rank')
 
     from .visitor.visitor_route import visitor_api
     api.add_namespace(visitor_api, '/visitor')

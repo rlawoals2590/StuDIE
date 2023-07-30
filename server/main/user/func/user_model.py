@@ -11,6 +11,7 @@ class Model:
         self.belong = kwargs['belong']
         self.gender = kwargs['gender']
         self.local = kwargs['local']
+        self.vision = kwargs['vision']
         self.rival_id = None
         self.passwd = kwargs['passwd']
         self.join_date = datetime.now()
@@ -33,6 +34,7 @@ class Model:
             'belong': self.belong,
             'gender': self.gender,
             'local': self.local,
+            'vision': self.vision,
             'rival_id': self.rival_id,
             'passwd': passwd,
             'join_date': self.join_date,
