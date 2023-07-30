@@ -127,18 +127,3 @@ class Resign(Resource):
         return resp
 
 
-@user_api.route('/upload', methods=['POST'])
-class UploadImage(Resource):
-    @user_api.expect(user_api.model('image upload', {
-        'image': fields.String(required=True, description='Base64 encoded image data'),
-    }))
-    def post(self):
-        image_data = request.json['image']
-        image_data = image_data.split(',')[1]
-        print(image_data[:100])
-
-        with open('image.jpg', 'wb') as image_file:
-            image_file.write(base64.b64decode(image_data))
-        return {'message': "Image uploaded successfully"}, 200
-
-

@@ -37,8 +37,8 @@ def create_app():
     from .user.user_route import user_api
     api.add_namespace(user_api, '/user')
 
-    # from .room import room_route
-    # app.register_blueprint(room_route.room_route)
+    from .room.room_route import room_api
+    api.add_namespace(room_api, '/room')
 
     # from .rank.rank_route import rank_api
     # api.add_namespace(rank_api, '/rank')
