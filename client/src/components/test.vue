@@ -20,7 +20,7 @@
 
 <style scoped>
 .main-container {
-    display: flex;
+    display: flex;  
     height: 100vh;
     background-color: #C3D2D8;
     display: flex;

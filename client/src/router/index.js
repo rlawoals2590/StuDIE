@@ -54,7 +54,11 @@ const routes = [
      path: '/signup',
     component: SignUp ,
     meta: { authorization: ["guest"] }
-  },
+  },  {
+    path: '/test',
+   component: test ,
+   meta: { authorization: ["client"] }
+ },
 
 
 

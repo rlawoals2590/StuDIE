@@ -41,6 +41,29 @@
 
 <script>
 export default {
+  methods:{
+    captureImage() {
+      const video = this.$refs.videoElement;
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL('image/jpeg');
+      this.sendImageToServer(imageData);
+    },
+    sendImageToServer(imageData) {
+      fetch('/room/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: imageData }),
+      }).then((response) => {
+        // 응답 처리
+      });
+    },
+  },
   data() {
     return {
       progress: 50,
@@ -57,8 +80,18 @@ export default {
           console.log("Something went wrong:", error);
         });
     }
+
+    setInterval(() => {
+      
+
+      this.captureImage()
+    }, 1000);
+
+
   },
+  
 };
+
 </script>
 
 <style scoped>

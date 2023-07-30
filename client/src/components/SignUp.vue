@@ -46,22 +46,21 @@ import axios from 'axios';
     },
     methods: {
       async signUp() {
-        const FormData = require('form-data');
-        let data = new FormData();
-        data.append('id', this.id);
-        data.append('passwd',this.passwd);
-        data.append('name', this.name);
-        data.append('birth', this.birth);
-        data.append('gender', this.gender);
-        data.append('belong',this.belong);
-        data.append('local', this.local);
 
+        let data = {
+          id: this.id,
+        passwd:this.passwd,
+        name: this.name,
+        birth: this.birth,
+        gender: this.gender,
+        belong:this.belong,
+        local: this.local,
+      };
         let config = {
           method: 'post',
-          maxBodyLength: Infinity,
           url: '/user/register/',
           headers: { 
-            'Content-Type' :  'multipart/form-data'
+            'Content-Type' :  'application/json' // The content type should be application/json for JSON data
           },
           data : data
         };
