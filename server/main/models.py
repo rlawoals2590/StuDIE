@@ -15,6 +15,7 @@ class User(db.Model):
     join_date = db.Column(db.DateTime(), nullable=False)
     login_token = db.Column(db.Text())
     point = db.Column(db.Integer)
+    vision = db.Column(db.Text())
 
 
 

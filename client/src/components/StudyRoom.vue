@@ -85,7 +85,7 @@
 
       this.interval1 = setInterval(() => {
 
-        fetch('/room/score', {
+        fetch('/room/score/', {
           method : 'GET'
         }).then((response) => {
           return response.json();
