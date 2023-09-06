@@ -139,3 +139,6 @@ class CHECKOUT_STUDYING :
             self.user_score[user_id] -= 2
             
         return self.user_score[user_id]
+
+    def stop_detection(self, user_id : str) :
+        return self.user_score.pop(user_id)
