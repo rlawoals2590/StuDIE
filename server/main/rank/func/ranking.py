@@ -30,30 +30,30 @@ def belong_ranking(belong, point, user_id):
     return dict_belong_rank
 
 
-def personal_ranking(name, point, user_id):
+def personal_ranking(point, user_id):
     rank_over = func.rank().over(order_by=point.desc()).label('rank')
-    result = User.query.with_entities(name, point, rank_over).filter(User.id == user_id).limit(30).all()
+    result = User.query.with_entities(user_id, point, rank_over).filter(User.id == user_id).limit(30).all()
     personal_rank = [[i[2], i[0]] for i in result]
     dict_personal_rank = []
 
     for i in personal_rank:
-        dict_personal_rank.append({'name': i[1], 'ranking': i[0]})
+        dict_personal_rank.append({'id': i[1], 'ranking': i[0]})
 
     return dict_personal_rank
 
 
-def user_ranking(user_name, user_point, user_id, id):
+def user_ranking(user_point, user_id, id):
     user_info = User.query.filter_by(id=id).first()
-    name = user_info.name
+    id = user_info.id
 
     rank_over = func.rank().over(order_by=user_point.desc()).label('rank')
-    result = User.query.with_entities(user_name, user_point, rank_over).filter(User.id == user_id).all()
+    result = User.query.with_entities(user_id, user_point, rank_over).filter(User.id == user_id).all()
     personal_rank = [[i[2], i[0]] for i in result]
 
     for i in personal_rank:
-        if i[1] == name:
+        if i[1] == id:
             user_rank = [
-                {'name': i[1], 'ranking': i[0]}
+                {'id': i[1], 'ranking': i[0]}
             ]
 
     return user_rank

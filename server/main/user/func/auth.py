@@ -17,13 +17,10 @@ def get_all_users():
     user_list = []
     for i in user:
         user_info = {
-            'name': i.name,
-            'gender': i.gender,
-            'age': i.birth,
+            'id': i.id,
             'belong': i.belong,
             'local': i.local,
             'point': i.point,
-            'rival_id': i.rival_id
         }
         user_list.append(user_info)
     return user_list
@@ -32,13 +29,10 @@ def get_all_users():
 def get_users(id):
     user = User.query.filter_by(id=id).first()
     user_info = {
-        'name': user.name,
-        'gender': user.gender,
-        'age': user.birth,
+        'id': user.id,
         'belong': user.belong,
         'local': user.local,
-        'point': user.point,
-        'rival_id': user.rival_id
+        'point': user.point
     }
     return user_info
 
@@ -54,14 +48,9 @@ def pw_check(get_passwd, save_passwd):
 
 def sign_up(user_info):
     sign_std = User(id=user_info['id'],
-                    name=user_info['name'],
-                    birth=user_info['birth'],
                     belong=user_info['belong'],
-                    gender=user_info['gender'],
                     local=user_info['local'],
-                    rival_id=user_info['rival_id'],
                     passwd=user_info['passwd'],
-                    join_date=user_info['join_date'],
                     login_token=user_info['token'])
     db.session.add(sign_std)
     db.session.commit()
