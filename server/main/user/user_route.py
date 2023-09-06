@@ -31,8 +31,7 @@ class OtherUsers(Resource):
     @user_validation()
     def get(self, id=None):
         if id is None:
-            print('test')
-            return 'test'
+            return 'None user id'
         return jsonify(get_users(id))
 
 
