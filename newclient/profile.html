@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>공돌이 - MZ의 공부법</title>
-
+    <title>공돌이 - MZ의 공부법 </title>
 </head>
 <body>
 
@@ -21,34 +20,45 @@
     </nav>
 <!-- 헤더 -->
 <div class="header">
-    <h1> 순공 타이머 ⏱</h1>
+    <h1> 프로필 📒</h1>
 
-    <span> 내 <span class="accent">순공 시간</span>을 <span class="accent">기록</span>해보세요 </span>
 
 </div>
 <!-- 헤더 -->
 
 <!-- 메인 -->
-
-
 <div class="main">
-    <div class="timer">
-        <span id="minutes">00</span>:<span id="seconds">00</span>
+
+    <!-- User Photo
+    <div class="profile-photo">
+        <img src="path-to-default-profile-pic.jpg" alt="User Photo" id="userPhoto">
+    </div> -->
+    <div class="person-icon">
+
     </div>
-    <button onclick="startTimer()" id="start">공부 시작</button>
-    <button onclick="saveRecord()" id="reset">공부 종료</button>
+    <!-- Basic Info -->
+    <div class="basic-info">
+        <h2 id="userName">아이디 : yjspro</h2>
+        <p id="userEmail">소속 : 세명컴퓨터고등학교</p>
+        <p id="userLocation">지역 : 경기도</p>
+    </div>
 
-</div> 
+    
 
+    <!-- Buttons -->
+    <div class="buttons">
+        <button onclick="editProfile()">프로필 수정</button>
+        <button onclick="logout()">로그아웃</button>
+    </div>
 
-<ul id="recordList"></ul>
-
+</div>
 
 <!-- 메인 -->
 
 
+
 </body>
-<script src="JS/studyTimer.js"></script>
+<script src="JS/profile.js"></script>
 <script src="JS/checkLogin.js"></script>
 
 </html>
