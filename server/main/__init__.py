@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_restx import Api
+from flask_cors import CORS
 
 from config import Config
 import config
@@ -13,6 +14,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     api = Api(app)
 
     app.config.from_object(config)
