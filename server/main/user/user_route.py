@@ -6,7 +6,7 @@ from flask_restx import Resource, Namespace, fields
 
 from .func.user_model import Model
 from .func.auth import get_users, get_pw, sign_up, pw_check, insert_token, \
-    user_validation, delete_token, resign_user, check_user
+    user_validation, delete_token, resign_user, check_user, get_all_users
 
 
 user_api = Namespace('user_api')
@@ -28,7 +28,7 @@ class Index(Resource):
 
 @user_api.route('/get_users/<string:id>/')
 class OtherUsers(Resource):
-    # @user_validation()
+    @user_validation()
     def get(self, id=None):
         if id is None:
             print('test')
@@ -38,10 +38,9 @@ class OtherUsers(Resource):
 
 @user_api.route('/get_users/')
 class Users(Resource):
-    # @user_validation()
+    @user_validation()
     def get(self):
-        id = escape(session['id'])
-        return jsonify(get_users(id))
+        return jsonify(get_all_users())
 
 
 @user_api.route('/register/')
@@ -118,7 +117,7 @@ class Logout(Resource):
         return resp
 
 
-@user_api.route('/resign')
+@user_api.route('/resign/')
 class Resign(Resource):
     @user_validation()
     def get(self):
