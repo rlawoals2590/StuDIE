@@ -132,11 +132,10 @@ class CHECKOUT_STUDYING :
         return not_studying                                    
     def start_detection(self, image_path : str, user_id : str) :
         if user_id not in self.user_score : 
-            self.user_score[user_id] = 100
+            self.user_score[user_id] = 0
             
         image = cv2.imread(image_path)
         if self.face_checkout(image) and self.hand_checkout(image) :
-            if self.user_score[user_id] > 0 :
-                self.user_score[user_id] -= 2
+            self.user_score[user_id] -= 2
             
         return self.user_score[user_id]
