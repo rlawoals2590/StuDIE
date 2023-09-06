@@ -12,6 +12,23 @@ def check_user(id):
         return True
 
 
+def get_all_users():
+    user = User.query.all()
+    user_list = []
+    for i in user:
+        user_info = {
+            'name': i.name,
+            'gender': i.gender,
+            'age': i.birth,
+            'belong': i.belong,
+            'local': i.local,
+            'point': i.point,
+            'rival_id': i.rival_id
+        }
+        user_list.append(user_info)
+    return user_list
+
+
 def get_users(id):
     user = User.query.filter_by(id=id).first()
     user_info = {
