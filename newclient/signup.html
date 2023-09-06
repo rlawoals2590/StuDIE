@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSS/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>공돌이 - MZ의 공부법 </title>
+</head>
+<body>
+
+
+<!-- 헤더 -->
+<div class="header">
+    <h1> 회원가입</h1>
+</div>
+<!-- 헤더 -->
+<div class="main">
+
+<!-- 메인 -->
+<form class="login_form">
+<div class="input_con">
+    <label for="id">아이디&nbsp;&nbsp;&nbsp;&nbsp; :</label>
+    <input type="text"  id="id">
+</div>
+<div class="input_con">
+    <label for="id">비밀번호 :</label>
+    <input type="password"  id="id">
+</div>
+<div class="input_con">
+    <label for="id">소속 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</label>
+    <input type="text"  id="id">
+</div>
+<div class="input_con">
+    <label for="id">지역 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+    <input type="text"  id="id">
+</div>
+
+
+
+</form>
+
+
+<button onclick="signup()">
+    가입하기
+</button>
+</div>
+
+
+<!-- 메인 -->
+
+
+
+</body>
+<script src="JS/login.js"></script>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif; /* Added a default font for better appearance */
+    }
+    
+    body {
+        display: flex;
+        justify-content: center; /* Horizontal centering */
+        align-items: center; /* Vertical centering */
+        flex-direction: column; /* This ensures that the items are stacked vertically */
+    }
+    
+    .header, .main {
+        /* Optional: If you want to provide some space between the header and the main content */
+        margin-bottom: 20px;
+    }
+    
+    .input_con {
+        margin-bottom: 10px; /* Provides spacing between input fields */
+    }
+</style>
+</html>
