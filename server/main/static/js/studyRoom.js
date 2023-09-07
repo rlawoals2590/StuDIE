@@ -1,3 +1,4 @@
+totalScore = 0;
 document.addEventListener("DOMContentLoaded", function() {
     const videoElement = document.getElementById("webcam");
     const loadingElement = document.getElementById("loading");
@@ -18,8 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }).then((response) => {
             return response.json();
             }).then(data => {
-                console.log(data);
+                
                 document.getElementsByClassName('score')[0].innerText = `현재 : ${data.score}점`
+                
+                fetch('/room/save/' +  `${data.score - totalScore}`);
+                totalScore = data.score
             }).catch(error => {
                 console.log(error);
             })
@@ -65,3 +69,9 @@ function sendImageToServer(imageData) {
         alert("이 브라우저는 웹캠을 지원하지 않습니다.");
     }
 });
+
+
+function saveDB(){
+    
+}
+    
