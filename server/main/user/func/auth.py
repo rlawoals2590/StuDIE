@@ -51,7 +51,8 @@ def sign_up(user_info):
                     belong=user_info['belong'],
                     local=user_info['local'],
                     passwd=user_info['passwd'],
-                    login_token=user_info['token'])
+                    login_token=user_info['token'],
+                    point=user_info['point'])
     db.session.add(sign_std)
     db.session.commit()
     return 'Success'

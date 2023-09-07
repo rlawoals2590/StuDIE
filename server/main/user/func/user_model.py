@@ -10,6 +10,7 @@ class Model:
         self.local = kwargs['local']
         self.passwd = kwargs['passwd']
         self.token = None
+        self.point = 0
 
         self.user_info = []
 
@@ -26,7 +27,8 @@ class Model:
             'belong': self.belong,
             'local': self.local,
             'passwd': passwd,
-            'token': self.token
+            'token': self.token,
+            'point': self.point
         }
 
         return self.user_info
