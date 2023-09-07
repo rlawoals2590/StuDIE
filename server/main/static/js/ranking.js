@@ -25,9 +25,9 @@ function loadRankingByCategory() {
         currentRankings.forEach((record, index) => {
             const li = document.createElement("li");
             if(record.name === undefined){
-                li.textContent = `${index + 1}. ${record.id} - ${record.ranking}st` ;
+                li.textContent = `${record.ranking}. ${record.id} - ${record.point} 포인트` ;
             }else{
-                li.textContent = `${index + 1}. ${record.name} - ${record.ranking} st`;
+                li.textContent = `${record.ranking}. ${record.name} - ${record.point} 포인트` ;
             }
 
 

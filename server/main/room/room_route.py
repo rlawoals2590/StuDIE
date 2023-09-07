@@ -36,7 +36,6 @@ class UploadImage(Resource):
 
 @room_api.route('/score/')
 class Score(Resource):
-
     def get(self):
         id = escape(session['id'])
         score = detection.start_detection("main/ai_models/image/image.jpg", id)
