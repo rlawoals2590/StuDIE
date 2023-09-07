@@ -1,13 +1,14 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template, make_response
 from ..user.func.auth import user_validation
 from markupsafe import escape
-
+from main.models import User
+from main import db
 from main.ai_models.checkout_studying import CHECKOUT_STUDYING
 
-from flask_restx import Resource, Namespace, fields
+from flask_restx import Resource, Namespace, fields, cors
 import base64
 
-room_api = Namespace('room_api')
+room_api = Namespace('room_api', decorators=[cors.crossdomain(origin="*")])
 
 detection = CHECKOUT_STUDYING(5)
 
@@ -40,7 +41,25 @@ class Score(Resource):
     def get(self):
         id = escape(session['id'])
         score = detection.start_detection("main/ai_models/image/image.jpg", id)
-        print(score)
+
         return {'score': score}, 200
+
+
+@room_api.route('/save/<int:score>')
+class Save(Resource):
+
+    def get(self, score):
+        id = escape(session['id'])
+
+        user_score_save = User.query.filter_by(id=id).first()
+
+        if user_score_save:
+            user_score_save.point += score
+
+            db.session().commit()
+
+            return 'Succes'
+        else:
+            return 'Fail'
 
 
