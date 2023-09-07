@@ -1,15 +1,15 @@
 from flask_jwt_extended import create_access_token, get_jwt
 
-from flask import request, make_response, session, jsonify
+from flask import request, make_response, session, jsonify, render_template
 from markupsafe import escape
-from flask_restx import Resource, Namespace, fields
+from flask_restx import Resource, Namespace, fields, cors
 
 from .func.user_model import Model
 from .func.auth import get_users, get_pw, sign_up, pw_check, insert_token, \
     user_validation, delete_token, resign_user, check_user, get_all_users
 
 
-user_api = Namespace('user_api')
+user_api = Namespace('user_api', decorators=[cors.crossdomain(origin="*")])
 jwt_blocklist = set()
 
 
@@ -23,7 +23,7 @@ user_login = user_api.model('user_api', strict=True, model={
 class Index(Resource):
     @user_validation()
     def get(self):
-        return {'status': 'user'}
+        return {'status': 'ok'}
 
 
 @user_api.route('/get_users/<string:id>/')
@@ -44,6 +44,9 @@ class Users(Resource):
 
 @user_api.route('/register/')
 class Register(Resource):
+    def get(self):
+        return make_response(render_template('signup.html'))
+
     @user_api.expect(user_api.model('user register', {
             'id': fields.String(title='아이디', default='abcde1234', required=True),
             'passwd': fields.String(title='비밀번호', default='Abcd@1234', required=True),
@@ -65,6 +68,9 @@ class Register(Resource):
 
 @user_api.route('/login/')
 class Login(Resource):
+    def get(self):
+        return make_response(render_template('login.html'))
+
     @user_api.expect(user_api.model('user login', {
         'id': fields.String(title='아이디', default='abcde1234', required=True),
         'passwd': fields.String(title='비밀번호', default='Abcd@1234', required=True),

@@ -2,11 +2,11 @@ from flask import jsonify
 from main import db
 from main.models import User
 from sqlalchemy import func
-from flask_restx import Resource, Namespace
+from flask_restx import Resource, Namespace, cors
 
 from ..user.func.auth import user_validation
 
-visitor_api = Namespace('visitor_api')
+visitor_api = Namespace('visitor_api', decorators=[cors.crossdomain(origin="*")])
 
 
 @visitor_api.route('/count/')
