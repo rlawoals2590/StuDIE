@@ -25,6 +25,12 @@ class Index(Resource):
     def get(self):
         return {'status': 'ok'}
 
+@user_api.route('/myinfo/')
+class MyInfo(Resource):
+    @user_validation()
+    def get(self):
+        id = escape(session['id'])
+        return jsonify(get_users(id))
 
 @user_api.route('/get_users/<string:id>/')
 class OtherUsers(Resource):
