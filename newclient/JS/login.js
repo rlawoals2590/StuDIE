@@ -12,6 +12,25 @@ function go_signup(){
 
 function signup(){
     // 회원가입 로직 돌기
+    id = document.getElementById('id').value;
+    password = document.getElementById('password').value;
+    belong = document.getElementById('belong').value;
+    local = document.getElementById('local').value;
+    fetch('http://localhost:5000/user/register', {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/josn"
+        },
+        body: JSON.stringify(
+            {
+                "id": id,
+                "passwd": password,
+                "belong": belong,
+                "local": local
+
+            }
+        )
+    }).then((response) => console.log(response));
     signBool = true;
     if(signBool){
         alert("회원가입 되셨습니다!");
