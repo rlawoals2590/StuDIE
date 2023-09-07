@@ -11,7 +11,6 @@ rank_api = Namespace('rank_api', decorators=[cors.crossdomain(origin="*")])
 
 @rank_api.route('/')
 class Index(Resource):
-    @user_validation()
     def get(self):
         return make_response(render_template('ranking.html'))
 

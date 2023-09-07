@@ -1,7 +1,13 @@
-if (!localStorage.getItem('isLoggedIn')) {
-    // Redirect to login page
-    location.href =  "http://127.0.0.1:5500/NewEye/newclient/login.html";
-    
+if (window.location.pathname !== '/user/login' && window.location.pathname !== '/') {
+    fetch('/user/', {
+        method : "GET"
+    }).then((response) => {
+        return response.json();
+    }).then(data => {
+        if (data.status === "Authentication failed") {
+            location.href = "/user/login";
+        } else {
+            
+                }
+    });
 }
-
-

@@ -1,41 +1,91 @@
 function go_signup(){
-    // Get the current pathname, e.g., /path/to/login.html
-    let path = location.pathname;
-
-    // Replace 'login.html' with 'signup.html'
-    let newPath = path.replace('login.html', 'signup.html');
-
-    // Set the new URL
-    location.href = location.origin + newPath;
+    // 회원가입 버튼
+    location.href = "/user/register"
 }
 
 
 function signup(){
-    // 회원가입 로직 돌기
-    signBool = true;
-    if(signBool){
-        alert("회원가입 되셨습니다!");
-        // Get the current pathname, e.g., /path/to/login.html  
-        let path = location.pathname;
+    // 회원가입 로직
+    id = document.getElementById('id').value;
+    password = document.getElementById('password').value;
+    belong = document.getElementById('belong').value;
+    local = document.getElementById('local').value;
+    fetch('/user/register', {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(
+            {
+                "id": id,
+                "passwd": password,
+                "belong": belong,
+                "local": local
 
-        // Replace 'login.html' with 'signup.html'
-        let newPath = path.replace('signup.html', 'login.html');
+            }
+        )
+    })  .then(response => {
+        // 서버 응답을 JSON 형식으로 파싱
+        return response.json();
+    })
+    .then(data => {
+        // 파싱된 데이터를 사용
 
-        // Set the new URL
-        location.href = location.origin + newPath;
-}
+    })
+    .catch(error => {
+        // 오류 처리
+        console.error('오류 발생:', error);
+    });
+    
+    alert("회원가입이 완료되었습니다");
+        location.href = "/user/login"    
+    
+    
 
 
 
 }
 
 function login(){
-    localStorage.setItem('isLoggedIn', true)
-    let path = location.pathname;
+    // 로그인 로직
+    id = document.getElementById('id').value;
+    password = document.getElementById('password').value;
+    
+    const requestData = {
+    id: id,
+    passwd: password
+    };
 
-    // Replace 'login.html' with 'signup.html'
-    let newPath = path.replace('login.html', 'index.html');
-
-    // Set the new URL
-    location.href = location.origin + newPath;
+    fetch('/user/login/', {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error('서버 응답 오류');
+    }
+    return response.json();
+    })
+    .then(data => {
+    if(data.status === "Success"){
+        location.href="/"
+        }else{
+            
+            alert("아이디 혹은 비밀번호가 틀렸습니다!")
+            document.getElementById('id').value = ""
+            document.getElementById('password').value = ""
+        }
+    console.log('응답 데이터:' +  data.status);
+    console.log();
+    
+    })
+    .catch(error => {
+    console.error('오류 발생:', error);
+    });
+    
+    
 }

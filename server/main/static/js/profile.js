@@ -1,6 +1,13 @@
 function logout(){
-    localStorage.removeItem('isLoggedIn');
-    location.href = location.href;
+    fetch('/user/logout', {
+        method : "GET"
+    }).then((response) => {
+        return response.json();
+    }).then(data => {
+        
+            location.href = "/user/login";
+            
+    });
     
 }
 

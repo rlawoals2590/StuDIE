@@ -65,6 +65,11 @@ class Register(Resource):
         else:
             return {'status': 'Registration failed'}
 
+@user_api.route('/profile/')
+class Profile(Resource):
+    def get(self):
+        return make_response(render_template('profile.html'))
+
 
 @user_api.route('/login/')
 class Login(Resource):

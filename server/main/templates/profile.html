@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href=" {{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/style.css') }}"> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>공돌이 - MZ의 공부법 </title>
 </head>
@@ -10,11 +10,11 @@
 
     <nav>
         <ul class="navbar">
-            <li><a href="index.html">메인</a></li>
-            <li><a href="studyRoom.html">AI 공부방</a></li>
-            <li><a href="studyTimer.html">순공 타이머</a></li>
-            <li><a href="ranking.html">랭킹</a></li>
-            <li><a href="profile.html">프로필</a></li>
+            <li><a href="/">메인</a></li>
+            <li><a href="/room/">AI 공부방</a></li>
+            <li><a href="/studyTimer">순공 타이머</a></li>
+            <li><a href="/rank">랭킹</a></li>
+            <li><a href="/user/profile">프로필</a></li>
 
         </ul>
     </nav>
@@ -58,7 +58,7 @@
 
 
 </body>
-<script src="JS/profile.js"></script>
-<script src="JS/checkLogin.js"></script>
+<script src=" {{ url_for('static', filename='js/profile.js') }}"></script>
+<script src=" {{ url_for('static', filename='js/checkLogin.js') }}"></script>
 
 </html>
