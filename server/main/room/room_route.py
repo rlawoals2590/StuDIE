@@ -1,4 +1,4 @@
-from flask import Blueprint, request, session, redirect, url_for, render_template
+from flask import Blueprint, request, session, redirect, url_for, render_template, make_response
 from ..user.func.auth import user_validation
 from markupsafe import escape
 
@@ -10,6 +10,12 @@ import base64
 room_api = Namespace('room_api')
 
 detection = CHECKOUT_STUDYING(5)
+
+
+@room_api.route('/')
+class Index(Resource):
+    def get(self):
+        return make_response(render_template('studyRoom.html'))
 
 
 @room_api.route('/upload')
