@@ -9,6 +9,7 @@
 html{
     width: 100%;
     height: 100%;
+    
 }
 /* 공통 스타일 */
 body {
@@ -21,7 +22,10 @@ body {
     background-color: #1e1e1e;
     color: #F4EEE0;
 }
+h1, label{
+    font-family: 'jalnan';
 
+}
 
 
 
@@ -120,6 +124,10 @@ button{
     margin-top: 15px;
     font-family: "jalnan";
 }
+
+
+
+
 .main{
     text-align: center;
 }
