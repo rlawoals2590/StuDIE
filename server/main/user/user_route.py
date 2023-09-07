@@ -47,25 +47,17 @@ class Register(Resource):
     @user_api.expect(user_api.model('user register', {
             'id': fields.String(title='아이디', default='abcde1234', required=True),
             'passwd': fields.String(title='비밀번호', default='Abcd@1234', required=True),
-            'name': fields.String(title='이름', default='홍길동', required=True),
-            'birth': fields.Date(title='생년', default='2005', required=True),
-            'gender': fields.Integer(title='성별', default=0, required=True),
             'belong': fields.String(title='소속', default='세명컴퓨터고등학교', required=True),
-            'local': fields.String(title='지역', default='서울', required=True),
-            'vision': fields.String(title='목표', default='서울대 가기', required=True),
+            'local': fields.String(title='지역', default='서울', required=True)
     }))
     def post(self):
         id = request.json.get('id')
         passwd = request.json.get('passwd')
-        name = request.json.get('name')
-        birth = request.json.get('birth')
-        gender = request.json.get('gender')
         belong = request.json.get('belong')
         local = request.json.get('local')
-        vision = request.json.get('vision')
 
         if check_user(id):
-            student_info = Model(id=id, name=name, birth=birth, belong=belong, gender=gender, local=local, passwd=passwd, vision=vision)
+            student_info = Model(id=id, belong=belong, local=local, passwd=passwd)
             return sign_up(student_info.user_model())
         else:
             return {'status': 'Registration failed'}

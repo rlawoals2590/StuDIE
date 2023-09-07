@@ -34,7 +34,7 @@ class Belong(Resource):
 class Personal(Resource):
     @user_validation()
     def get(self):
-        return jsonify(personal_ranking(User.name, User.point, User.id))
+        return jsonify(personal_ranking(User.point, User.id))
 
 
 @rank_api.route('/ranking/')
@@ -43,4 +43,4 @@ class UserRanking(Resource):
     def get(self):
         id = escape(session['id'])
 
-        return user_ranking(User.name, User.point, User.id, id)
+        return user_ranking(User.point, User.id, id)
