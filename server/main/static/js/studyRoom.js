@@ -46,6 +46,26 @@ function sendImageToServer(imageData) {
     });
 }
 
+function resetScore() {
+    const dataToSend = {
+        status: 'test'
+    };
+    fetch('/room/score/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Server response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function(stream) {
@@ -59,7 +79,8 @@ function sendImageToServer(imageData) {
                     captureImage();
                     
                 }, 5000);
-                
+            }).then(() => {
+                resetScore();
             })
             .catch(function(err) {
                 console.error("웹캠에 접근할 수 없습니다:", err);

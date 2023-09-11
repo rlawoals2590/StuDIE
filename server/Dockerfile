@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . /app
 
 RUN pip3 install -r requirements.txt
+RUN apt-get update && apt-get -y install libgl1-mesa-glx
 
 ENV FLASK_APP=main
 ENV FLASK_DEBUG=true

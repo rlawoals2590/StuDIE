@@ -1,4 +1,5 @@
-from flask import Blueprint, request, session, redirect, url_for, render_template, make_response
+from flask import Blueprint, request, session, redirect, url_for, render_template, make_response, jsonify
+from functools import wraps
 from ..user.func.auth import user_validation
 from markupsafe import escape
 from main.models import User
@@ -8,7 +9,9 @@ from main.ai_models.checkout_studying import CHECKOUT_STUDYING
 from flask_restx import Resource, Namespace, fields, cors
 import base64
 
+
 room_api = Namespace('room_api', decorators=[cors.crossdomain(origin="*")])
+room_app = Blueprint('main', __name__)
 
 detection = CHECKOUT_STUDYING(5)
 
@@ -42,6 +45,12 @@ class Score(Resource):
         score = detection.start_detection("main/ai_models/image/image.jpg", id)
 
         return {'score': score}, 200
+
+    def post(self):
+        data = request.json
+        id = escape(session['id'])
+        detection.stop_detection(id)
+        return jsonify({"message": "Score reset successfully!"})
 
 
 @room_api.route('/save/<int:score>')

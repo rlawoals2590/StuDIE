@@ -41,6 +41,9 @@ def create_app():
     from .room.room_route import room_api
     api.add_namespace(room_api, '/room')
 
+    from .room.room_route import room_app
+    app.register_blueprint(room_app)
+
     from .rank.rank_route import rank_api
     api.add_namespace(rank_api, '/rank')
 
